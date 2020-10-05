@@ -50,31 +50,37 @@ class LoginForm extends Component {
         <div role='alert'>
           {error && <p>{error}</p>}
         </div>
-        <div>
+        <div className="regField">
           <Label htmlFor='login-username-input'>
             Username
           </Label>
+          <div className="inputField">
           <Input
             ref={this.firstInput}
             id='login-username-input'
             name='username'
             required
           />
+          </div>
         </div>
-        <div>
+        <div className="regField">
           <Label htmlFor='login-password-input'>
             Password
           </Label>
+          <div className="inputField">
           <Input
             id='login-password-input'
             name='password'
             type='password'
             required
           />
+          </div>
         </div>
+        <footer>
         <Button type='submit'>
           Login
         </Button>
+        </footer>
       </form>
     )
   }

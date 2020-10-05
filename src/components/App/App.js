@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Header from '../Header/Header'
+
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import PublicOnlyRoute from '../PublicOnlyRoute/PublicOnlyRoute'
 import RegistrationRoute from '../../routes/RegistrationRoute/RegistrationRoute'
@@ -22,7 +23,10 @@ export default class App extends Component {
     const { hasError } = this.state
     return (
       <div className='App'>
-        <Header />
+         <header className="App_NavBar">
+             <Header/>
+             
+         </header>
         <main>
           {hasError && (
             <p>There was an error! Oh no!</p>

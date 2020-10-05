@@ -40,43 +40,50 @@ class RegistrationForm extends Component {
   render() {
     const { error } = this.state
     return (
+      <div className="form">
       <form
         onSubmit={this.handleSubmit}
       >
         <div role='alert'>
           {error && <p>{error}</p>}
         </div>
-        <div>
+        <div className="regField">
           <Label htmlFor='registration-name-input'>
             Enter your name<Required />
           </Label>
-          <Input
-            ref={this.firstInput}
-            id='registration-name-input'
-            name='name'
-            required
-          />
+          <div className="inputField">
+            <Input 
+              ref={this.firstInput}
+              id='registration-name-input'
+              name='name'
+              required
+            />
+            </div>
         </div>
-        <div>
+        <div className="regField">
           <Label htmlFor='registration-username-input'>
             Choose a username<Required />
           </Label>
-          <Input
-            id='registration-username-input'
-            name='username'
-            required
-          />
+          <div className="inputField">
+            <Input
+              id='registration-username-input'
+              name='username'
+              required
+            />
+          </div>
         </div>
-        <div>
+        <div className="regField">
           <Label htmlFor='registration-password-input'>
             Choose a password<Required />
           </Label>
-          <Input
-            id='registration-password-input'
-            name='password'
-            type='password'
-            required
-          />
+          <div className="inputField">
+            <Input
+              id='registration-password-input'
+              name='password'
+              type='password'
+              required
+            />
+          </div>
         </div>
         <footer>
           <Button type='submit'>
@@ -86,6 +93,7 @@ class RegistrationForm extends Component {
           <Link to='/login'>Already have an account?</Link>
         </footer>
       </form>
+    </div>
     )
   }
 }
