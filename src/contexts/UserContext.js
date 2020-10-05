@@ -6,11 +6,24 @@ import IdleService from '../services/idle-service'
 const UserContext = React.createContext({
   user: {},
   error: null,
+  language: null,
+  words: null,
+  nextWord: {},
+  totalScore: null,
+  currentWord: {},
+  guess: null,
+
   setError: () => {},
   clearError: () => {},
   setUser: () => {},
   processLogin: () => {},
   processLogout: () => {},
+  setLanguage: () => {},
+  setWords: () => {},
+  setNextWord: () => {},
+  setTotalScore: () => {},
+  setCurrentWord: () => {},
+  setGuess: () => {}
 })
 
 export default UserContext
@@ -18,7 +31,7 @@ export default UserContext
 export class UserProvider extends Component {
   constructor(props) {
     super(props)
-    const state = { user: {}, error: null }
+    const state = { user: {}, error: null, language: null, words: null, nextWord: null, totalScore: null, currWord: null, guess: null}
 
     const jwtPayload = TokenService.parseAuthToken()
 
@@ -35,7 +48,7 @@ export class UserProvider extends Component {
 
   componentDidMount() {
     if (TokenService.hasAuthToken()) {
-      IdleService.regiserIdleTimerResets()
+      IdleService.registerIdleTimerResets()
       TokenService.queueCallbackBeforeExpiry(() => {
         this.fetchRefreshToken()
       })
@@ -56,8 +69,32 @@ export class UserProvider extends Component {
     this.setState({ error: null })
   }
 
+  setLanguage = (language) => {
+    this.setState({language})
+  }
+
+  setWords = (words) => {
+    this.setState({words})
+  }
+
   setUser = user => {
     this.setState({ user })
+  }
+
+  setNextWord = nextWord => {
+    this.setState({nextWord})
+  }
+
+  setTotalScore = totalScore => {
+    this.setState({totalScore})
+  }
+
+  setCurrentWord = currentWord => {
+    this.setState({currentWord})
+  }
+
+  setGuess = guess => {
+    this.setState({guess})
   }
 
   processLogin = authToken => {
@@ -68,7 +105,7 @@ export class UserProvider extends Component {
       name: jwtPayload.name,
       username: jwtPayload.sub,
     })
-    IdleService.regiserIdleTimerResets()
+    IdleService.registerIdleTimerResets()
     TokenService.queueCallbackBeforeExpiry(() => {
       this.fetchRefreshToken()
     })
@@ -105,11 +142,23 @@ export class UserProvider extends Component {
     const value = {
       user: this.state.user,
       error: this.state.error,
+      totalScore: this.state.totalScore,
       setError: this.setError,
+      currentWord: this.state.currentWord,
       clearError: this.clearError,
       setUser: this.setUser,
       processLogin: this.processLogin,
       processLogout: this.processLogout,
+      setLanguage: this.setLanguage,
+      language: this.state.language,
+      setWords: this.setWords,
+      guess: this.state.guess,
+      words: this.state.words,
+      nextWord: this.state.nextWord,
+      setNextWord: this.setNextWord,
+      setTotalScore: this.setTotalScore,
+      setCurrWord: this.setCurrWord,
+      setGuess: this.setGuess
     }
     return (
       <UserContext.Provider value={value}>
